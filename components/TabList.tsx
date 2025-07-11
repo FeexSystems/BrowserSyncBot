@@ -1,7 +1,18 @@
 import React from "react";
 import { ExternalLink, ArrowRightLeft, Star } from "lucide-react";
 
-export const TabList = ({ tabs }) => (
+interface TabListProps {
+  tabs: Array<{
+    id: number;
+    title: string;
+    url: string;
+    device: string;
+    browser: string;
+    favicon: string;
+  }>;
+}
+
+export const TabList: React.FC<TabListProps> = ({ tabs }) => (
   <div className="space-y-4">
     {tabs.map((tab) => (
       <div
