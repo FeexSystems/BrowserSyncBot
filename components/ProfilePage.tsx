@@ -335,7 +335,56 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ onClose }) => {
                   <div className="w-5 h-5 bg-white rounded-full absolute right-0.5 top-0.5"></div>
                 </div>
               </div>
-              {/* Add more security settings */}
+
+              <div className="flex items-center justify-between p-4 glass-button rounded-xl">
+                <div className="flex items-center space-x-3">
+                  <Key className="w-5 h-5 text-blue-400" />
+                  <div>
+                    <p className="text-white font-medium">Password Manager</p>
+                    <p className="text-sm text-gray-400">
+                      Manage saved passwords
+                    </p>
+                  </div>
+                </div>
+                <motion.button
+                  className="glass-button px-4 py-2 rounded-lg text-sm text-white"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  Configure
+                </motion.button>
+              </div>
+
+              <div className="flex items-center justify-between p-4 glass-button rounded-xl">
+                <div className="flex items-center space-x-3">
+                  <Shield className="w-5 h-5 text-purple-400" />
+                  <div>
+                    <p className="text-white font-medium">Device Encryption</p>
+                    <p className="text-sm text-gray-400">
+                      Encrypt data on all devices
+                    </p>
+                  </div>
+                </div>
+                <div className="w-12 h-6 bg-purple-500 rounded-full relative">
+                  <div className="w-5 h-5 bg-white rounded-full absolute right-0.5 top-0.5"></div>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between p-4 glass-button rounded-xl">
+                <div className="flex items-center space-x-3">
+                  <Activity className="w-5 h-5 text-orange-400" />
+                  <div>
+                    <p className="text-white font-medium">
+                      Security Monitoring
+                    </p>
+                    <p className="text-sm text-gray-400">
+                      Real-time threat detection
+                    </p>
+                  </div>
+                </div>
+                <div className="w-12 h-6 bg-orange-500 rounded-full relative">
+                  <div className="w-5 h-5 bg-white rounded-full absolute right-0.5 top-0.5"></div>
+                </div>
+              </div>
             </div>
           </motion.div>
         );
