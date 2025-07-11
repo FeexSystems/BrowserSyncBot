@@ -76,7 +76,7 @@ export const DeviceCard: React.FC<DeviceCardProps> = ({
   const DeviceIcon = getDeviceIcon(device.type);
   const StatusIcon = getStatusIcon(device.status);
   const batteryLevel = getBatteryLevel(device.type);
-  const performance = getPerformanceData();
+  const performance = getPerformanceData(device.id);
 
   const cardVariants = {
     idle: {
