@@ -213,7 +213,7 @@ export const DeviceCard: React.FC<DeviceCardProps> = ({
                 className="w-full flex items-center space-x-2 px-3 py-2 text-left text-sm text-red-400 hover:bg-red-500/10 rounded-lg"
                 whileHover={{ x: 5 }}
               >
-                <Power className="w-4 h-4" />
+                <PowerOff className="w-4 h-4" />
                 <span>Disconnect</span>
               </motion.button>
             </motion.div>
