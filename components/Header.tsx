@@ -212,6 +212,9 @@ export const Header: React.FC<HeaderProps> = ({
                 )}
               </motion.button>
 
+              {/* Theme Toggle */}
+              <ThemeToggle />
+
               {/* Settings */}
               <motion.button
                 className="glass-button p-3 rounded-xl tooltip"
