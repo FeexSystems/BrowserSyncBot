@@ -206,7 +206,7 @@ export const DeviceCard: React.FC<DeviceCardProps> = ({
                 onClick={() => onSync?.(device.id)}
                 whileHover={{ x: 5 }}
               >
-                <Sync className="w-4 h-4" />
+                <RefreshCw className="w-4 h-4" />
                 <span>Sync Now</span>
               </motion.button>
               <motion.button
