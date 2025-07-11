@@ -39,11 +39,19 @@ const getBatteryLevel = (deviceType: string) => {
   return levels[deviceType as keyof typeof levels] || 100;
 };
 
-const getPerformanceData = () => ({
-  cpu: Math.floor(Math.random() * 40) + 20,
-  memory: Math.floor(Math.random() * 60) + 30,
-  storage: Math.floor(Math.random() * 50) + 40,
-});
+const getPerformanceData = (deviceId: string) => {
+  // Use device ID to generate consistent values
+  const hash = deviceId.split("").reduce((a, b) => {
+    a = (a << 5) - a + b.charCodeAt(0);
+    return a & a;
+  }, 0);
+
+  const cpu = Math.abs(hash % 40) + 20;
+  const memory = Math.abs((hash * 2) % 60) + 30;
+  const storage = Math.abs((hash * 3) % 50) + 40;
+
+  return { cpu, memory, storage };
+};
 
 interface DeviceCardProps {
   device: {
