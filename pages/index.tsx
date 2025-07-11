@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Header } from "../components/Header";
-import { SidebarTabs } from "../components/SibebarTabs";
+import { SidebarTabs } from "../components/SidebarTabs";
 import { DeviceCard } from "../components/DeviceCard";
 import { TabList } from "../components/TabList";
 import { PasswordList } from "../components/PasswordList";
