@@ -313,7 +313,7 @@ export const DeviceCard: React.FC<DeviceCardProps> = ({
             whileHover={{ scale: 1.02, rotate: 180 }}
             whileTap={{ scale: 0.98 }}
           >
-            <Sync className="w-4 h-4" />
+            <RefreshCw className="w-4 h-4" />
           </motion.button>
         </motion.div>
 
