@@ -85,7 +85,10 @@ const IndexPage = () => {
   const [syncStatus, setSyncStatus] = useState("online");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
+    <div
+      className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white"
+      suppressHydrationWarning={true}
+    >
       <Header syncStatus={syncStatus} />
       <div className="max-w-7xl mx-auto px-6 py-8">
         <SidebarTabs activeTab={activeTab} setActiveTab={setActiveTab} />
