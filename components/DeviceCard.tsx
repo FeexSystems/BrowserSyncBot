@@ -116,6 +116,7 @@ export const DeviceCard: React.FC<DeviceCardProps> = ({
         className="glass-card rounded-2xl p-6 border border-white/10 relative overflow-hidden"
         variants={cardVariants}
         style={{ transformStyle: "preserve-3d" }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
       >
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-5">
