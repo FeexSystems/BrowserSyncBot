@@ -12,8 +12,8 @@ import {
   Activity,
   MoreVertical,
   Eye,
-  Sync,
-  Power,
+  RefreshCw,
+  PowerOff,
 } from "lucide-react";
 
 const getDeviceIcon = (type: string) => {
