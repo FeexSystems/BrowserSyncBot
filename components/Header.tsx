@@ -12,6 +12,7 @@ import {
   Shield,
   Zap,
 } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 interface HeaderProps {
   syncStatus: string;
