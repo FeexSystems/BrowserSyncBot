@@ -90,10 +90,6 @@ export const DeviceCard: React.FC<DeviceCardProps> = ({
       rotateY: 5,
       z: 50,
       scale: 1.02,
-      transition: {
-        duration: 0.3,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
     },
   };
 
