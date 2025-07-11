@@ -92,7 +92,7 @@ export const DeviceCard: React.FC<DeviceCardProps> = ({
       scale: 1.02,
       transition: {
         duration: 0.3,
-        ease: "easeOut",
+        ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
   };
