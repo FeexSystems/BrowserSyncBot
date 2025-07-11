@@ -18,7 +18,18 @@ const getStatusIcon = (status: string) => {
   return status === "online" ? Wifi : WifiOff;
 };
 
-export const DeviceCard = ({ device }) => {
+interface DeviceCardProps {
+  device: {
+    id: string;
+    name: string;
+    type: string;
+    browser: string;
+    lastSync: string;
+    status: string;
+  };
+}
+
+export const DeviceCard: React.FC<DeviceCardProps> = ({ device }) => {
   const DeviceIcon = getDeviceIcon(device.type);
   const StatusIcon = getStatusIcon(device.status);
 
