@@ -15,6 +15,7 @@ import {
   RefreshCw,
   PowerOff,
 } from "lucide-react";
+import { useBrowser } from "../src/hooks/useBrowser";
 
 const getDeviceIcon = (type: string) => {
   switch (type) {
@@ -71,12 +72,26 @@ export const DeviceCard: React.FC<DeviceCardProps> = ({
   onRemoteView,
   onSync,
 }) => {
+  const {
+    devices,
+    selectedDevice,
+    selectDevice,
+    getDevicePerformance,
+    getDeviceBrowser,
+  } = useBrowser();
   const [isHovered, setIsHovered] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const DeviceIcon = getDeviceIcon(device.type);
   const StatusIcon = getStatusIcon(device.status);
   const batteryLevel = getBatteryLevel(device.type);
-  const performance = getPerformanceData(device.id);
+  const performance = getDevicePerformance(device.id) || {
+    cpu: 0,
+    memory: 0,
+    storage: 0,
+  };
+  const browser = getDeviceBrowser(device.id) || { name: "Unknown", version: "" };
+
+  const isSelected = selectedDevice?.id === device.id;
 
   const cardVariants = {
     idle: {
@@ -113,10 +128,15 @@ export const DeviceCard: React.FC<DeviceCardProps> = ({
       />
 
       <motion.div
-        className="glass-card rounded-2xl p-6 border border-white/10 relative overflow-hidden"
+        className={`glass-card rounded-2xl p-6 border relative overflow-hidden transition-all duration-300 ${
+          isSelected
+            ? "border-purple-500 shadow-2xl shadow-purple-500/20"
+            : "border-white/10"
+        }`}
         variants={cardVariants}
         style={{ transformStyle: "preserve-3d" }}
         transition={{ duration: 0.3, ease: "easeOut" }}
+        onClick={() => selectDevice(device.id)}
       >
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-5">
@@ -234,7 +254,9 @@ export const DeviceCard: React.FC<DeviceCardProps> = ({
         >
           <div>
             <h3 className="font-semibold text-white text-lg">{device.name}</h3>
-            <p className="text-sm text-gray-400">{device.browser}</p>
+            <p className="text-sm text-gray-400">
+              {browser.name} {browser.version}
+            </p>
             <p className="text-xs text-gray-500">
               Last sync: {device.lastSync}
             </p>
