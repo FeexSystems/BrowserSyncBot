@@ -48,7 +48,7 @@ export const TabManager: React.FC<TabManagerProps> = ({ devices }) => {
       if (tab) {
         // Send via WebSocket if connected, otherwise use store method
         if (isConnected) {
-          wseSendTabToDevice(tab, deviceId);
+          wsSendTabToDevice(tab, deviceId);
         } else {
           storeSetTabToDevice(tabId, deviceId);
         }
