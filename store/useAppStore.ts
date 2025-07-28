@@ -46,229 +46,227 @@ interface AppActions {
 
 type AppStore = AppState & AppActions;
 
-export const useAppStore = create<AppStore>()(
-  subscribeWithSelector((set, get) => ({
-    // Initial state
-    currentDevice: null,
-    devices: [],
-    tabs: [],
-    tabGroups: [],
-    activeTabFilters: [],
-    passwords: [],
-    showPasswords: false,
-    passwordFilters: [],
-    history: [],
-    historyFilters: [],
-    activeMainTab: 'sync',
-    isConnected: false,
-    syncStatus: 'offline',
-    lastSyncTime: null,
-    recentEvents: [],
+export const useAppStore = create<AppStore>((set, get) => ({
+  // Initial state
+  currentDevice: null,
+  devices: [],
+  tabs: [],
+  tabGroups: [],
+  activeTabFilters: [],
+  passwords: [],
+  showPasswords: false,
+  passwordFilters: [],
+  history: [],
+  historyFilters: [],
+  activeMainTab: 'sync',
+  isConnected: false,
+  syncStatus: 'offline',
+  lastSyncTime: null,
+  recentEvents: [],
 
-    // Device actions
-    setCurrentDevice: (device) => set({ currentDevice: device }),
-    
-    addDevice: (deviceData) => {
-      const device: Device = { ...deviceData, id: uuidv4() };
-      set((state) => ({ 
-        devices: [...state.devices, device],
-        recentEvents: [...state.recentEvents, {
-          id: uuidv4(),
-          type: 'device_connected',
-          deviceId: device.id,
-          timestamp: new Date(),
-          data: device
-        }].slice(-50) // Keep only last 50 events
-      }));
-    },
-    
-    updateDevice: (id, updates) => set((state) => ({
-      devices: state.devices.map(device => 
-        device.id === id ? { ...device, ...updates } : device
-      ),
-      currentDevice: state.currentDevice?.id === id 
-        ? { ...state.currentDevice, ...updates } 
-        : state.currentDevice
-    })),
-    
-    removeDevice: (id) => set((state) => ({
-      devices: state.devices.filter(device => device.id !== id),
-      tabs: state.tabs.filter(tab => tab.deviceId !== id),
-      history: state.history.filter(item => item.deviceId !== id),
-      currentDevice: state.currentDevice?.id === id ? null : state.currentDevice,
+  // Device actions
+  setCurrentDevice: (device) => set({ currentDevice: device }),
+  
+  addDevice: (deviceData) => {
+    const device: Device = { ...deviceData, id: uuidv4() };
+    set((state) => ({ 
+      devices: [...state.devices, device],
       recentEvents: [...state.recentEvents, {
         id: uuidv4(),
-        type: 'device_disconnected',
-        deviceId: id,
+        type: 'device_connected',
+        deviceId: device.id,
         timestamp: new Date(),
-        data: null
-      }].slice(-50)
-    })),
+        data: device
+      }].slice(-50) // Keep only last 50 events
+    }));
+  },
+  
+  updateDevice: (id, updates) => set((state) => ({
+    devices: state.devices.map(device => 
+      device.id === id ? { ...device, ...updates } : device
+    ),
+    currentDevice: state.currentDevice?.id === id 
+      ? { ...state.currentDevice, ...updates } 
+      : state.currentDevice
+  })),
+  
+  removeDevice: (id) => set((state) => ({
+    devices: state.devices.filter(device => device.id !== id),
+    tabs: state.tabs.filter(tab => tab.deviceId !== id),
+    history: state.history.filter(item => item.deviceId !== id),
+    currentDevice: state.currentDevice?.id === id ? null : state.currentDevice,
+    recentEvents: [...state.recentEvents, {
+      id: uuidv4(),
+      type: 'device_disconnected',
+      deviceId: id,
+      timestamp: new Date(),
+      data: null
+    }].slice(-50)
+  })),
 
-    // Tab actions
-    addTab: (tabData) => {
-      const tab: Tab = { ...tabData, id: uuidv4(), lastAccessed: new Date() };
-      set((state) => ({ 
-        tabs: [...state.tabs, tab],
-        recentEvents: [...state.recentEvents, {
-          id: uuidv4(),
-          type: 'tab_opened',
-          deviceId: tab.deviceId,
-          timestamp: new Date(),
-          data: tab
-        }].slice(-50)
-      }));
-    },
-    
-    updateTab: (id, updates) => set((state) => ({
-      tabs: state.tabs.map(tab => 
-        tab.id === id ? { ...tab, ...updates } : tab
-      ),
+  // Tab actions
+  addTab: (tabData) => {
+    const tab: Tab = { ...tabData, id: uuidv4(), lastAccessed: new Date() };
+    set((state) => ({ 
+      tabs: [...state.tabs, tab],
       recentEvents: [...state.recentEvents, {
         id: uuidv4(),
-        type: 'tab_updated',
-        deviceId: state.tabs.find(t => t.id === id)?.deviceId || '',
+        type: 'tab_opened',
+        deviceId: tab.deviceId,
         timestamp: new Date(),
-        data: { id, updates }
+        data: tab
       }].slice(-50)
-    })),
-    
-    removeTab: (id) => {
-      const tab = get().tabs.find(t => t.id === id);
-      set((state) => ({
-        tabs: state.tabs.filter(tab => tab.id !== id),
-        tabGroups: state.tabGroups.map(group => ({
-          ...group,
-          tabIds: group.tabIds.filter(tabId => tabId !== id)
-        })),
-        recentEvents: tab ? [...state.recentEvents, {
-          id: uuidv4(),
-          type: 'tab_closed',
-          deviceId: tab.deviceId,
-          timestamp: new Date(),
-          data: tab
-        }].slice(-50) : state.recentEvents
-      }));
-    },
-    
-    sendTabToDevice: (tabId, deviceId) => {
-      const tab = get().tabs.find(t => t.id === tabId);
-      if (tab) {
-        const newTab: Tab = { ...tab, id: uuidv4(), deviceId, lastAccessed: new Date() };
-        set((state) => ({ tabs: [...state.tabs, newTab] }));
-      }
-    },
-    
-    createTabGroup: (name, color, deviceId) => {
-      const group: TabGroup = {
+    }));
+  },
+  
+  updateTab: (id, updates) => set((state) => ({
+    tabs: state.tabs.map(tab => 
+      tab.id === id ? { ...tab, ...updates } : tab
+    ),
+    recentEvents: [...state.recentEvents, {
+      id: uuidv4(),
+      type: 'tab_updated',
+      deviceId: state.tabs.find(t => t.id === id)?.deviceId || '',
+      timestamp: new Date(),
+      data: { id, updates }
+    }].slice(-50)
+  })),
+  
+  removeTab: (id) => {
+    const tab = get().tabs.find(t => t.id === id);
+    set((state) => ({
+      tabs: state.tabs.filter(tab => tab.id !== id),
+      tabGroups: state.tabGroups.map(group => ({
+        ...group,
+        tabIds: group.tabIds.filter(tabId => tabId !== id)
+      })),
+      recentEvents: tab ? [...state.recentEvents, {
         id: uuidv4(),
-        name,
-        color,
-        deviceId,
-        tabIds: []
-      };
-      set((state) => ({ tabGroups: [...state.tabGroups, group] }));
-    },
-    
-    addTabToGroup: (tabId, groupId) => set((state) => ({
-      tabGroups: state.tabGroups.map(group =>
-        group.id === groupId 
-          ? { ...group, tabIds: [...group.tabIds, tabId] }
-          : group
-      )
-    })),
-    
-    removeTabFromGroup: (tabId, groupId) => set((state) => ({
-      tabGroups: state.tabGroups.map(group =>
-        group.id === groupId 
-          ? { ...group, tabIds: group.tabIds.filter(id => id !== tabId) }
-          : group
-      )
-    })),
+        type: 'tab_closed',
+        deviceId: tab.deviceId,
+        timestamp: new Date(),
+        data: tab
+      }].slice(-50) : state.recentEvents
+    }));
+  },
+  
+  sendTabToDevice: (tabId, deviceId) => {
+    const tab = get().tabs.find(t => t.id === tabId);
+    if (tab) {
+      const newTab: Tab = { ...tab, id: uuidv4(), deviceId, lastAccessed: new Date() };
+      set((state) => ({ tabs: [...state.tabs, newTab] }));
+    }
+  },
+  
+  createTabGroup: (name, color, deviceId) => {
+    const group: TabGroup = {
+      id: uuidv4(),
+      name,
+      color,
+      deviceId,
+      tabIds: []
+    };
+    set((state) => ({ tabGroups: [...state.tabGroups, group] }));
+  },
+  
+  addTabToGroup: (tabId, groupId) => set((state) => ({
+    tabGroups: state.tabGroups.map(group =>
+      group.id === groupId 
+        ? { ...group, tabIds: [...group.tabIds, tabId] }
+        : group
+    )
+  })),
+  
+  removeTabFromGroup: (tabId, groupId) => set((state) => ({
+    tabGroups: state.tabGroups.map(group =>
+      group.id === groupId 
+        ? { ...group, tabIds: group.tabIds.filter(id => id !== tabId) }
+        : group
+    )
+  })),
 
-    // Password actions
-    addPassword: (passwordData) => {
-      const password: Password = { 
-        ...passwordData, 
-        id: uuidv4(),
-        lastUpdated: new Date()
-      };
-      set((state) => ({ 
-        passwords: [...state.passwords, password],
-        recentEvents: [...state.recentEvents, {
-          id: uuidv4(),
-          type: 'password_added',
-          deviceId: state.currentDevice?.id || '',
-          timestamp: new Date(),
-          data: { site: password.site }
-        }].slice(-50)
-      }));
-    },
-    
-    updatePassword: (id, updates) => set((state) => ({
-      passwords: state.passwords.map(password => 
-        password.id === id 
-          ? { ...password, ...updates, lastUpdated: new Date() } 
-          : password
-      ),
+  // Password actions
+  addPassword: (passwordData) => {
+    const password: Password = { 
+      ...passwordData, 
+      id: uuidv4(),
+      lastUpdated: new Date()
+    };
+    set((state) => ({ 
+      passwords: [...state.passwords, password],
       recentEvents: [...state.recentEvents, {
         id: uuidv4(),
-        type: 'password_updated',
+        type: 'password_added',
         deviceId: state.currentDevice?.id || '',
         timestamp: new Date(),
-        data: { id, updates }
+        data: { site: password.site }
       }].slice(-50)
-    })),
-    
-    removePassword: (id) => set((state) => ({
-      passwords: state.passwords.filter(password => password.id !== id)
-    })),
-    
-    togglePasswordVisibility: () => set((state) => ({
-      showPasswords: !state.showPasswords
-    })),
+    }));
+  },
+  
+  updatePassword: (id, updates) => set((state) => ({
+    passwords: state.passwords.map(password => 
+      password.id === id 
+        ? { ...password, ...updates, lastUpdated: new Date() } 
+        : password
+    ),
+    recentEvents: [...state.recentEvents, {
+      id: uuidv4(),
+      type: 'password_updated',
+      deviceId: state.currentDevice?.id || '',
+      timestamp: new Date(),
+      data: { id, updates }
+    }].slice(-50)
+  })),
+  
+  removePassword: (id) => set((state) => ({
+    passwords: state.passwords.filter(password => password.id !== id)
+  })),
+  
+  togglePasswordVisibility: () => set((state) => ({
+    showPasswords: !state.showPasswords
+  })),
 
-    // History actions
-    addHistoryItem: (itemData) => {
-      const item: HistoryItem = { 
-        ...itemData, 
-        id: uuidv4(),
-        visitTime: new Date()
-      };
-      set((state) => ({ history: [...state.history, item] }));
-    },
-    
-    removeHistoryItem: (id) => set((state) => ({
-      history: state.history.filter(item => item.id !== id)
-    })),
-    
-    clearHistory: (deviceId) => set((state) => ({
-      history: deviceId 
-        ? state.history.filter(item => item.deviceId !== deviceId)
-        : []
-    })),
+  // History actions
+  addHistoryItem: (itemData) => {
+    const item: HistoryItem = { 
+      ...itemData, 
+      id: uuidv4(),
+      visitTime: new Date()
+    };
+    set((state) => ({ history: [...state.history, item] }));
+  },
+  
+  removeHistoryItem: (id) => set((state) => ({
+    history: state.history.filter(item => item.id !== id)
+  })),
+  
+  clearHistory: (deviceId) => set((state) => ({
+    history: deviceId 
+      ? state.history.filter(item => item.deviceId !== deviceId)
+      : []
+  })),
 
-    // UI actions
-    setActiveMainTab: (tab) => set({ activeMainTab: tab }),
-    setSyncStatus: (status) => set({ syncStatus: status }),
-    setConnected: (connected) => set({ isConnected: connected }),
+  // UI actions
+  setActiveMainTab: (tab) => set({ activeMainTab: tab }),
+  setSyncStatus: (status) => set({ syncStatus: status }),
+  setConnected: (connected) => set({ isConnected: connected }),
 
-    // Sync actions
-    addSyncEvent: (eventData) => {
-      const event: SyncEvent = { ...eventData, id: uuidv4() };
-      set((state) => ({ 
-        recentEvents: [...state.recentEvents, event].slice(-50)
-      }));
-    },
-    
-    markSynced: () => set({ lastSyncTime: new Date() }),
+  // Sync actions
+  addSyncEvent: (eventData) => {
+    const event: SyncEvent = { ...eventData, id: uuidv4() };
+    set((state) => ({ 
+      recentEvents: [...state.recentEvents, event].slice(-50)
+    }));
+  },
+  
+  markSynced: () => set({ lastSyncTime: new Date() }),
 
-    // Filter actions
-    setTabFilters: (filters) => set({ activeTabFilters: filters }),
-    setPasswordFilters: (filters) => set({ passwordFilters: filters }),
-    setHistoryFilters: (filters) => set({ historyFilters: filters }),
-  }))
-);
+  // Filter actions
+  setTabFilters: (filters) => set({ activeTabFilters: filters }),
+  setPasswordFilters: (filters) => set({ passwordFilters: filters }),
+  setHistoryFilters: (filters) => set({ historyFilters: filters }),
+}));
 
 // Selectors for computed values
 export const useFilteredTabs = () => {
