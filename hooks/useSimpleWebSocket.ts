@@ -46,7 +46,7 @@ export const useSimpleWebSocket = (options: UseSimpleWebSocketOptions = {}) => {
       const success = await initializeMockWebSocket(currentDevice.id);
       
       if (success) {
-        serviceRef.current = getMockWebSocketService();
+        serviceRef.current = getMockWebSocketService(currentDevice.id);
         setIsConnected(true);
         setSyncStatus('online');
         onConnectionChange?.(true);
