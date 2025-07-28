@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Play, Square, Camera, Eye, Download, Trash2, Plus, Monitor, Zap, Clock } from 'lucide-react';
-import { getBrowserAutomationService, PageSnapshot } from '@/services/browserAutomationService';
+import { getSimpleBrowserService, MockPageSnapshot } from '@/services/simpleBrowserService';
 import { useAppStore } from '@/store/useAppStore';
 import { Tab } from '@/types';
 
