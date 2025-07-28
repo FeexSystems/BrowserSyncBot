@@ -12,7 +12,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "next": "^14.0.0",
-    "lucide-react": "^0.400.0"
+    "lucide-react": "^0.400.0",
+    "zustand": "^4.4.7",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "typescript": "^5.0.0",
