@@ -95,9 +95,9 @@ export default function HomePage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
       <Header syncStatus={syncStatus} />
       <div className="max-w-7xl mx-auto px-6 py-8">
-        {/* Sync Status */}
+        {/* Real-time Sync Status */}
         <div className="mb-6">
-          <SyncStatus />
+          <RealTimeSyncStatus />
         </div>
 
         <SidebarTabs activeTab={activeMainTab} setActiveTab={setActiveMainTab} />
