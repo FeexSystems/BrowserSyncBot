@@ -8,7 +8,7 @@ import { TabList } from '@/components/TabList';
 import { PasswordList } from '@/components/PasswordList';
 import { HistoryList } from '@/components/HistoryList';
 import { TabManager } from '@/components/advanced/TabManager';
-import { SyncStatus } from '@/components/advanced/SyncStatus';
+import { RealTimeSyncStatus } from '@/components/advanced/RealTimeSyncStatus';
 import { DeviceManager } from '@/components/advanced/DeviceManager';
 import { useAppStore } from '@/store/useAppStore';
 
