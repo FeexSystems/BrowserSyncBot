@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "ws-server": "node server/websocket-server.js",
+    "dev:full": "concurrently \"npm run ws-server\" \"npm run dev\""
   },
   "dependencies": {
     "react": "^18.2.0",
