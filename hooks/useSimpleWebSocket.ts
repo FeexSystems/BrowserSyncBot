@@ -140,7 +140,7 @@ export const useSimpleWebSocket = (options: UseSimpleWebSocketOptions = {}) => {
         disconnect();
       }
     };
-  }, [autoConnect, currentDevice, connect, disconnect, isConnected]);
+  }, [autoConnect, currentDevice?.id, isConnected]); // Only depend on stable values
 
   return {
     // Connection state
