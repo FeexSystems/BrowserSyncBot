@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Search, Filter, Send, Star, Folder, Plus, X, Wifi } from 'lucide-react';
 import { useAppStore, useFilteredTabs } from '@/store/useAppStore';
 import { Tab, Device } from '@/types';
-import useWebSocket from '@/hooks/useWebSocket';
+import useSimpleWebSocket from '@/hooks/useSimpleWebSocket';
 
 interface TabManagerProps {
   devices: Device[];
