@@ -101,6 +101,7 @@ export const TabManager: React.FC<TabManagerProps> = ({ devices }) => {
             >
               <Send className="w-4 h-4" />
               Send ({selectedTabs.size})
+              {isConnected && <Wifi className="w-3 h-3 text-green-400" />}
             </button>
           )}
         </div>
