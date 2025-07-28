@@ -239,11 +239,12 @@ export const getMockWebSocketService = (deviceId?: string): SimpleWebSocketServi
   if (!mockService && deviceId) {
     mockService = new SimpleWebSocketService(deviceId);
   }
-  
+
   if (!mockService) {
-    throw new Error('Mock WebSocket service not initialized. Provide a deviceId on first call.');
+    console.warn('Mock WebSocket service not initialized. Creating with default deviceId.');
+    mockService = new SimpleWebSocketService(deviceId || 'default-device');
   }
-  
+
   return mockService;
 };
 
