@@ -172,7 +172,12 @@ export const TabManager: React.FC<TabManagerProps> = ({ devices }) => {
                 </button>
                 
                 <button
-                  onClick={() => removeTab(tab.id)}
+                  onClick={() => {
+                    removeTab(tab.id);
+                    if (isConnected) {
+                      syncTab('close', tab);
+                    }
+                  }}
                   className="p-2 hover:bg-red-500/20 rounded-lg transition-colors text-red-400"
                   title="Remove tab"
                 >
