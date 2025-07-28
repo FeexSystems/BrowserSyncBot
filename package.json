@@ -20,7 +20,7 @@
     "ws": "^8.18.0",
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
-    "puppeteer": "^21.9.0",
+    "puppeteer": "^22.8.2",
     "react-iframe": "^1.8.5",
     "html2canvas": "^1.4.1",
     "jsdom": "^23.0.1"
