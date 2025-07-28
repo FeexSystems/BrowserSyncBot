@@ -36,8 +36,9 @@ export const useSimpleWebSocket = (options: UseSimpleWebSocketOptions = {}) => {
 
   // Initialize WebSocket connection
   const connect = useCallback(async () => {
-    if (!currentDevice) {
+    if (!currentDevice || !currentDevice.id) {
       console.warn('No current device set, cannot connect WebSocket');
+      onError?.('No device available for connection');
       return false;
     }
 
