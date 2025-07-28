@@ -116,6 +116,8 @@ export default function HomePage() {
           </div>
         )}
 
+        {activeMainTab === 'browser' && <BrowserFeatures />}
+
         {activeMainTab === 'passwords' && (
           <PasswordList
             passwords={[]}
