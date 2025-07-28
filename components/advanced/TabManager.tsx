@@ -18,7 +18,7 @@ export const TabManager: React.FC<TabManagerProps> = ({ devices }) => {
     activeTabFilters
   } = useAppStore();
 
-  const { sendTabToDevice: wseSendTabToDevice, syncTab, isConnected } = useWebSocket();
+  const { sendTabToDevice: wsSendTabToDevice, syncTab, isConnected } = useSimpleWebSocket();
   
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTabs, setSelectedTabs] = useState<Set<string>>(new Set());
