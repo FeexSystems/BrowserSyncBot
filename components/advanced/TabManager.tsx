@@ -10,13 +10,15 @@ interface TabManagerProps {
 
 export const TabManager: React.FC<TabManagerProps> = ({ devices }) => {
   const tabs = useFilteredTabs();
-  const { 
-    sendTabToDevice, 
-    removeTab, 
-    createTabGroup, 
+  const {
+    sendTabToDevice: storeSetTabToDevice,
+    removeTab,
+    createTabGroup,
     setTabFilters,
-    activeTabFilters 
+    activeTabFilters
   } = useAppStore();
+
+  const { sendTabToDevice: wseSendTabToDevice, syncTab, isConnected } = useWebSocket();
   
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTabs, setSelectedTabs] = useState<Set<string>>(new Set());
