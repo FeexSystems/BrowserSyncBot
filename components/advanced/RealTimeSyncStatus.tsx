@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Wifi, WifiOff, RefreshCw, AlertCircle, CheckCircle, Clock, Users, Zap, Settings, AlertTriangle } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
-import useWebSocket from '@/hooks/useWebSocket';
+import useSimpleWebSocket from '@/hooks/useSimpleWebSocket';
 
 export const RealTimeSyncStatus: React.FC = () => {
   const { syncStatus, currentDevice } = useAppStore();
