@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { subscribeWithSelector } from 'zustand/middleware';
 import { v4 as uuidv4 } from 'uuid';
 import { AppState, Device, Tab, Password, HistoryItem, SyncEvent, TabGroup } from '@/types';
 
