@@ -84,7 +84,7 @@ export default function HomePage() {
             deviceId: addedDevices[0].id,
             visitTime: new Date(),
             visitCount: 10,
-            favicon: '⚛��'
+            favicon: '⚛️'
           });
         }
       }, 100);
@@ -95,21 +95,35 @@ export default function HomePage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
       <Header syncStatus={syncStatus} />
       <div className="max-w-7xl mx-auto px-6 py-8">
-        <SidebarTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {mockDevices.map(device => <DeviceCard key={device.id} device={device} />)}
+        {/* Sync Status */}
+        <div className="mb-6">
+          <SyncStatus />
         </div>
 
-        {activeTab === 'sync' && <TabList tabs={mockTabs} />}
-        {activeTab === 'passwords' && (
+        <SidebarTabs activeTab={activeMainTab} setActiveTab={setActiveMainTab} />
+
+        {/* Device Overview */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {devices.map(device => <DeviceCard key={device.id} device={device} />)}
+        </div>
+
+        {/* Main Content */}
+        {activeMainTab === 'sync' && (
+          <div className="space-y-8">
+            <TabManager devices={devices} />
+            <DeviceManager />
+          </div>
+        )}
+
+        {activeMainTab === 'passwords' && (
           <PasswordList
-            passwords={mockPasswords}
-            showPasswords={showPasswords}
-            toggleVisibility={() => setShowPasswords(!showPasswords)}
+            passwords={[]}
+            showPasswords={false}
+            toggleVisibility={() => {}}
           />
         )}
-        {activeTab === 'history' && <HistoryList history={mockHistory} />}
+
+        {activeMainTab === 'history' && <HistoryList history={[]} />}
       </div>
     </div>
   );
