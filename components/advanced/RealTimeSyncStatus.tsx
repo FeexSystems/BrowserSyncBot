@@ -19,7 +19,7 @@ export const RealTimeSyncStatus: React.FC = () => {
     requestFullSync,
     resolveConflict
   } = useSimpleWebSocket({
-    autoConnect: true,
+    autoConnect: false, // Disable auto-connect to prevent errors
     onConnectionChange: (connected) => {
       console.log('WebSocket connection changed:', connected);
     },
