@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, Settings, Smartphone, Monitor, Tablet, Wifi, WifiOff, MoreVertical, Trash2, Edit } from 'lucide-react';
-import { useAppStore } from '../../store/useAppStore';
-import { Device } from '../../types';
+import { useAppStore } from '@/store/useAppStore';
+import { Device } from '@/types';
 
 export const DeviceManager: React.FC = () => {
   const { 
