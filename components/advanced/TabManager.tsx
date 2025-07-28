@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Search, Filter, Send, Star, Folder, Plus, X } from 'lucide-react';
-import { useAppStore, useFilteredTabs } from '../../store/useAppStore';
-import { Tab, Device } from '../../types';
+import { useAppStore, useFilteredTabs } from '@/store/useAppStore';
+import { Tab, Device } from '@/types';
 
 interface TabManagerProps {
   devices: Device[];
