@@ -1,12 +1,16 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Header } from '../components/Header';
 import { SidebarTabs } from '../components/SidebarTabs';
 import { DeviceCard } from '../components/DeviceCard';
 import { TabList } from '../components/TabList';
 import { PasswordList } from '../components/PasswordList';
 import { HistoryList } from '../components/HistoryList';
+import { TabManager } from '../components/advanced/TabManager';
+import { SyncStatus } from '../components/advanced/SyncStatus';
+import { DeviceManager } from '../components/advanced/DeviceManager';
+import { useAppStore } from '../store/useAppStore';
 
 const mockDevices = [
   { id: 'phone', name: 'iPhone 15 Pro', type: 'mobile', browser: 'Safari', lastSync: '2 min ago', status: 'online' },
