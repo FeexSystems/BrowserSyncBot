@@ -81,7 +81,7 @@ export interface AppState {
   historyFilters: string[];
   
   // UI state
-  activeMainTab: 'sync' | 'passwords' | 'history';
+  activeMainTab: 'sync' | 'browser' | 'passwords' | 'history';
   isConnected: boolean;
   syncStatus: 'online' | 'offline' | 'syncing' | 'error';
   lastSyncTime: Date | null;
