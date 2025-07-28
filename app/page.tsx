@@ -10,6 +10,7 @@ import { HistoryList } from '@/components/HistoryList';
 import { TabManager } from '@/components/advanced/TabManager';
 import { RealTimeSyncStatus } from '@/components/advanced/RealTimeSyncStatus';
 import { DeviceManager } from '@/components/advanced/DeviceManager';
+import { BrowserFeatures } from '@/components/advanced/BrowserFeatures';
 import { useAppStore } from '@/store/useAppStore';
 
 export default function HomePage() {
