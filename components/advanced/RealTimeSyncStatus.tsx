@@ -18,7 +18,7 @@ export const RealTimeSyncStatus: React.FC = () => {
     disconnect,
     requestFullSync,
     resolveConflict
-  } = useWebSocket({
+  } = useSimpleWebSocket({
     autoConnect: true,
     onConnectionChange: (connected) => {
       console.log('WebSocket connection changed:', connected);
