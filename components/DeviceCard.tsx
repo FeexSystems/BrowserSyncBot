@@ -1,5 +1,5 @@
 import React from 'react';
-import { Smartphone, Monitor, Tablet, Chrome, Safari, Globe } from 'lucide-react';
+import { Smartphone, Monitor, Tablet, Chrome, Globe } from 'lucide-react';
 
 const getDeviceIcon = (type: string) => {
   switch (type) {
@@ -13,7 +13,7 @@ const getDeviceIcon = (type: string) => {
 const getBrowserIcon = (browser: string) => {
   switch (browser.toLowerCase()) {
     case 'chrome': return Chrome;
-    case 'safari': return Safari;
+    case 'safari': return Globe;
     default: return Globe;
   }
 };
