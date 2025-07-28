@@ -30,7 +30,7 @@ interface AppActions {
   clearHistory: (deviceId?: string) => void;
   
   // UI actions
-  setActiveMainTab: (tab: 'sync' | 'passwords' | 'history') => void;
+  setActiveMainTab: (tab: 'sync' | 'browser' | 'passwords' | 'history') => void;
   setSyncStatus: (status: 'online' | 'offline' | 'syncing' | 'error') => void;
   setConnected: (connected: boolean) => void;
   
