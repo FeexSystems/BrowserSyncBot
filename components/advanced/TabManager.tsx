@@ -44,7 +44,15 @@ export const TabManager: React.FC<TabManagerProps> = ({ devices }) => {
 
   const handleSendToDevice = (deviceId: string) => {
     selectedTabs.forEach(tabId => {
-      sendTabToDevice(tabId, deviceId);
+      const tab = tabs.find(t => t.id === tabId);
+      if (tab) {
+        // Send via WebSocket if connected, otherwise use store method
+        if (isConnected) {
+          wseSendTabToDevice(tab, deviceId);
+        } else {
+          storeSetTabToDevice(tabId, deviceId);
+        }
+      }
     });
     setSelectedTabs(new Set());
     setShowSendModal(false);
