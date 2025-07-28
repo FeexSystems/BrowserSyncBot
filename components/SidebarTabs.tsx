@@ -1,8 +1,9 @@
 import React from 'react';
-import { ArrowRightLeft, Key, History } from 'lucide-react';
+import { ArrowRightLeft, Key, History, Monitor } from 'lucide-react';
 
 const tabs = [
   { id: 'sync', label: 'Tab Sync', icon: ArrowRightLeft },
+  { id: 'browser', label: 'Browser Tools', icon: Monitor },
   { id: 'passwords', label: 'Password Manager', icon: Key },
   { id: 'history', label: 'Browser History', icon: History }
 ];
