@@ -31,10 +31,10 @@ export const BrowserAutomationManager: React.FC = () => {
   const [selectedSession, setSelectedSession] = useState<string | null>(null);
 
   const { currentDevice, addTab, syncTab } = useAppStore();
-  const browserService = getBrowserAutomationService({
-    headless: false, // Show browser for better UX
+  const browserService = getSimpleBrowserService({
     width: 1280,
-    height: 720
+    height: 720,
+    userAgent: 'BrowserSync-Bot/1.0'
   });
 
   useEffect(() => {
